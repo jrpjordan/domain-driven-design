@@ -1,0 +1,34 @@
+<server description="Cargo Tracker Server">
+    <featureManager>
+        <feature>restfulWS-3.0</feature>
+        <feature>jsonb-2.0</feature>
+        <feature>jsonp-2.0</feature>
+        <feature>cdi-3.0</feature>
+        <feature>persistence-3.0</feature>
+        <feature>jdbc-4.3</feature>
+    </featureManager>
+
+    <variable name="default.http.port" defaultValue="5050" />
+    <variable name="default.https.port" defaultValue="5051" />
+
+    <httpEndpoint httpPort="${default.http.port}"
+                  httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
+
+    <webApplication
+        id="cargotracker" location="cargotracker.war"
+        contextRoot="/cargotracker" />
+
+    <library id="jdbcLib">
+        <fileset dir="jdbc" includes="*.jar"/>
+        <!-- <filset dir="${shared.resource.dir}" includes="*.jar" /> -->
+    </library>
+
+    <!-- Declare the jar files for MySQL access through JDBC -->
+    <dataSource id="cargotracker" jndiName="jdbc/cargotracker">
+        <jdbcDriver libraryRef="jdbcLib"/>
+        <properties serverName="localhost" portNumber="3306"
+                    databaseName="cargotracker"
+                    user="cargotracker" password="cargotracker" />
+    </dataSource>
+
+</server>
