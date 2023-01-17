@@ -12,6 +12,7 @@ import com.joser.cargotracker.sharedomain.events.CargoHandledEventData;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 public class HandlingActivityRegistrationCommandService {
@@ -23,6 +24,7 @@ public class HandlingActivityRegistrationCommandService {
     @Inject
     private Event<CargoHandledEvent> cargoHandledEventEventControl;
 
+    @Transactional
     public void registerHandlingActivityService(HandlingActivityRegistrationCommand handlingActivityRegistrationCommand) {
         System.out.println("Handling Voyage Number is " + handlingActivityRegistrationCommand.getVoyageNumber());
 

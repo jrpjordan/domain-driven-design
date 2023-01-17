@@ -14,7 +14,7 @@ public class ExternalCargoRoutingClient {
 
     public TransitPath findOptimalRoute(String origin, String destination, String arrivalDeadline) {
         final String REST_URI =
-                "http://localhost:9080/cargotracker/serviceapi/voyageRouting/optimalRoute";
+                "http://localhost:5050/cargotracker/serviceapi/voyageRouting/optimalRoute";
 
         Client client = ClientBuilder.newClient();
 

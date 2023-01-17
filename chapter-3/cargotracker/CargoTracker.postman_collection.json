@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "67bdc894-ebbf-409e-aac3-8c039bd78c37",
+		"name": "CargoTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cargobookingid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"bookingId\", jsonData.bookingId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingAmount\": 120,\n   \"originLocation\": \"CNHKG\",\n   \"destLocation\": \"USNYC\",\n   \"destArrivalDeadline\": \"2023-10-28\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargobooking"
+			},
+			"response": []
+		},
+		{
+			"name": "cargorouting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\":  \"{{bookingId}}\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargorouting"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-receive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\": \"{{bookingId}}\",\n   \"unLocode\": \"CNHKG\",\n   \"handlingType\": \"RECEIVE\",\n   \"completionTime\": \"2023-08-23\",\n   \"voyageNumber\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-load",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"CNHKG\",\n   \"handlingType\" : \"LOAD\",\n   \"completionTime\": \"2023-08-25\",\n   \"voyageNumber\" : \"0100S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-unloaded",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"CNHGH\",\n   \"handlingType\" : \"UNLOAD\",\n   \"completionTime\": \"2023-08-28\",\n   \"voyageNumber\" : \"0100S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-loaded2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"CNHGH\",\n   \"handlingType\" : \"LOAD\",\n   \"completionTime\": \"2023-09-01\",\n   \"voyageNumber\" : \"0101S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-unloaded2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"JNTKO\",\n   \"handlingType\" : \"UNLOAD\",\n   \"completionTime\": \"2023-09-10\",\n   \"voyageNumber\" : \"0101S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-loaded3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"JNTKO\",\n   \"handlingType\" : \"LOAD\",\n   \"completionTime\": \"2023-09-15\",\n   \"voyageNumber\" : \"0102S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-unloaded3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"USNYC\",\n   \"handlingType\" : \"UNLOAD\",\n   \"completionTime\": \"2023-09-25\",\n   \"voyageNumber\" : \"0102S\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-customs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"USNYC\",\n   \"handlingType\" : \"CUSTOMS\",\n   \"completionTime\": \"2023-09-26\",\n   \"voyageNumber\" : \"\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		},
+		{
+			"name": "cargohandling-claimed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"bookingId\" : \"{{bookingId}}\",\n   \"unLocode\" : \"USNYC\",\n   \"handlingType\" : \"CLAIM\",\n   \"completionTime\": \"2023-09-28\",\n   \"voyageNumber\" : \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5050/cargotracker/serviceapi/cargohandling"
+			},
+			"response": []
+		}
+	]
+}
